@@ -1,0 +1,443 @@
+body{
+    overflow: hidden;
+    background: linear-gradient(180deg, rgba(54,135,236,1) 0%, rgba(106,185,255,1) 51%, rgba(255,255,255,1) 100%);
+    background-size: cover;
+    min-height: 100vh;
+    
+}
+
+#ca{
+    z-index: 102;
+}
+
+#cloud1{
+    position: absolute;
+    top: 60%;
+    scale: 1.8;
+    z-index: 100;
+}
+
+#cloud2{
+    position: absolute;
+    top: 70%;
+    left: 20%;
+    scale: 1.8;
+    z-index: 100;
+}
+
+#cloud3{
+    position: absolute;
+    top: 60%;
+    left: 40%;
+    scale: 1.8;
+    z-index: 100;
+}
+
+#cloud4{
+    position: absolute;
+    top: 70%;
+    left: 60%;
+    scale: 1.8;
+    z-index: 100;
+}
+
+#cloud5{
+    position: absolute;
+    top: 70%;
+    left: 80%;
+    scale: 1.8;
+    z-index: 100;
+}
+
+#cloud6{
+    position: absolute;
+    top: 70%;
+    left: 40%;
+    scale: 1.8;
+    z-index: 100;
+}
+
+
+
+
+#escreen{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 105;
+    background-image: url('/static/door.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center;    /* Centers vertically */
+}
+
+#enterb{
+    font-size: 100px;
+    background-color: peachpuff;
+    border-radius: 20px;
+    font-family: 'custom';
+    cursor: pointer;
+}
+
+#enter{
+    width: 100%;
+    height: 100%;
+    z-index: 105;
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center;    /* Centers vertically */
+}
+
+@font-face{
+    font-family: 'custom';
+    src: url('NewakeFont-Demo.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face{
+    font-family: 'custom1';
+    src: url('fonts/coolvetica\ rg.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#chatbox{
+    display: flex;
+    flex-direction: column;      /* Stack items vertically */
+    justify-content: center;      /* Center items vertically */
+    align-items: center;  
+    border-radius: 20px;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    width: 500px;
+    height: 500px;
+    transform: translate(-50%, -50%) scale(1.3);
+    background-color: #10100f;
+    z-index: 101;
+}
+
+#chat::before{
+    content: '';
+    position: absolute;
+    
+    width: 480px;
+    height: 440px;
+    background-position: center;
+    opacity: 0.2;
+    border-radius: 15px;
+    background-size: cover;
+}
+
+#chat{
+    background-color: lightpink;
+    height: 450px;
+    width: 475px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    
+    
+   /* Stack items vertically */    
+    align-items: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-radius: 14px;
+    border: 2px solid pink;
+    margin-top: 10px;
+    flex-grow: 1;
+
+}
+
+
+#bubble1{
+    visibility: hidden;
+    position: absolute;
+    top: 10%;
+    left: 54%;
+}
+
+p.bubble {
+	position: relative;
+	width: 300px;
+	text-align: center;
+	line-height: 1.4em;
+	margin: 40px auto;
+	background-color: #fff;
+	border: 8px solid #333;
+	border-radius: 30px;
+	font-family: sans-serif;
+	padding: 20px;
+	font-size: large;
+}
+
+p.thought {
+	width: 300px;
+	border-radius: 200px;
+	padding: 30px;	
+}
+
+p.bubble:before,
+p.bubble:after {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+}
+
+p.speech:before {
+	left: 30px;
+	bottom: -50px;
+	border: 25px solid;
+	border-color: #333 transparent transparent #333;
+}
+
+p.speech:after {
+	left: 38px;
+	bottom: -30px;
+	border: 15px solid;
+	border-color: #fff transparent transparent #fff;
+}
+
+p.thought:before,
+p.thought:after {
+	left: 10px;
+	bottom: -30px;
+	width: 40px;
+	height: 40px;
+	background-color: #fff;
+	border: 8px solid #333;
+	-webkit-border-radius: 28px;
+	-moz-border-radius: 28px;
+	border-radius: 28px;
+}
+
+p.thought:after {
+	width: 20px;
+	height: 20px;
+	left: 5px;
+	bottom: -40px;
+	-webkit-border-radius: 18px;
+	-moz-border-radius: 18px;
+	border-radius: 18px;
+}
+
+.chatwrap {
+    overflow-y: auto; /* Allow scrolling */
+    width: 100%; /* Make sure it takes the full width */
+    height: 440px;
+    flex-grow: 1;
+}
+
+#chat::-webkit-scrollbar-track{
+    background: transparent;
+}
+
+#userinput{
+    border-radius: 10px;
+    border: none;
+    height: 30px;
+    width: 300px;
+    margin-bottom: 10px;
+    font-family: 'custom1';
+
+}
+
+#crown{
+    position: absolute;
+    left: 36%;
+    top: -5%;
+    scale: 0.7;
+
+}
+
+#sun{
+    position: absolute;
+    left: 70%;
+    top: 7%;
+    scale: 1.4;
+}
+
+#sendButton{
+    border-radius: 10px;
+    border: none;
+    height: 30px;
+    width: 80px;
+    background-color: lightblue;
+    font-family: 'custom1';
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#pnut{
+    scale: 1.9;
+    position: absolute;
+    left: 44%;
+    top: 35%;
+    
+}
+
+#halo{
+    position: absolute;
+    left: 40%;
+    top: 15%;
+    overflow: visible;
+
+}
+
+#wings{
+    scale: 0.8;
+    z-index: -1;
+    position: absolute;
+    left: 24%;
+    top: 15%;
+    border-radius: 50%;
+    overflow: visible;
+}
+
+#chatbar{
+    scale: 1.3;
+    z-index: 102;
+    position: absolute;
+    transform: translate(-50%, -50%); 
+    top: 80%;
+    left: 53%;
+    
+}
+
+#imageContainer{
+    position: absolute;
+    
+}
+
+#ca{
+    top: 85%;
+    font-size: 40px;
+    font-family: "custom";
+    position: absolute;
+    left: 48%;
+    transform: translate(-50%, -50%); /* Center the element */
+    text-align: center;
+}
+
+@-webkit-keyframes spin{
+    100%{-webkit-transform: rotate(360deg)}
+}
+
+
+#flower1{
+    position: absolute;
+    top: 0%;
+    left: -10%;
+    scale: 0.5;
+    opacity: 0.2;
+    -webkit-animation: spin 100s linear infinite;
+}
+
+#flower2{
+    scale: 0.5;
+    opacity: 0.3;
+    position: absolute;
+    top: -10%;
+    left: 60%;
+    filter: hue-rotate(90deg);
+    -webkit-animation: spin 90s linear infinite;
+}
+
+#flower3{
+    scale: 0.4;
+    opacity: 0.3;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    filter: hue-rotate(40deg);
+    -webkit-animation: spin 70s linear infinite;
+}
+
+#flower4{
+    scale: 0.4;
+    opacity: 0.3;
+    position: absolute;
+    top: 40%;
+    left: -5%;
+    filter: hue-rotate(140deg);
+    -webkit-animation: spin 40s linear infinite;
+}
+
+#chat p{
+    
+    font-family: 'custom1', sans-serif;
+    font-weight: bold;
+    width: 100%;
+    flex-shrink: 0;
+}
+
+#input{
+    position: absolute;
+    bottom: 10px;
+}
+
+.conchReply{
+    animation: typing 4s;
+    white-space: nowrap;
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.conchReply::before{
+    opacity: 100%;
+    font-weight: bold;
+    font-size: 20px;
+    content: 'magic conch: ';
+    background: linear-gradient(90deg, rgba(69,174,195,1) 11%, rgba(190,43,140,1) 47%, rgba(167,109,155,1) 70%, rgba(109,167,114,1) 90%, rgba(167,109,155,1) 100%);
+    background-clip: text;
+    color: transparent;
+    background-size: 200% auto;
+    animation: gradientAnimation 0.5s linear infinite;
+}
+
+@keyframes typing{
+    from {width: 0;}
+    to{width: 100%;}
+}
+
+
+
+#title{
+    font-family: 'custom';
+    position: absolute;
+    top: -12%;
+    text-shadow: 
+        -1px -1px 0px white,       /* Top left */
+         1px -1px 0px white,       /* Top right */
+        -1px  1px 0px white,       /* Bottom left */
+         1px  1px 0px white; 
+}
+
+@keyframes gradientAnimation{
+    0%{
+        background-position: 200% 50%;
+    }
+    100%{
+        background-position: 0% 50%;
+    }
+}
+
+.myReply::before{
+    content: 'you: ';
+    color: black;
+}
+
+
+
+#conch{
+    position: absolute;
+    left: 27%;
+    top: 0%;
+    scale: 0.5;
+}

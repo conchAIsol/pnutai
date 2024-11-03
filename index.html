@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PNUTAI</title>
+    <link rel="stylesheet" href="static/index.css">
+    <link rel="icon" href="static/favicon.ico" type="image/png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+</head>
+<body>
+    <img src="static/sun.png" id="sun">
+    <img src="static/cloud.png" id="cloud1">
+    <img src="static/cloud.png" id="cloud2">
+    <img src="static/cloud.png" id="cloud3">
+    <img src="static/cloud.png" id="cloud4">
+    <img src="static/cloud.png" id="cloud5">
+    <img src="static/cloud.png" id="cloud6">
+
+    <p id="ca">CA: will be announced shortly</p>
+
+    <img src="static/pnutt.gif" id="pnut">
+    <img src="static/wings.png" id="wings">
+    
+    <div id="bubble1">
+    <p class="bubble thought" id="speech"></p>
+    </div>
+    
+
+    
+   
+    <div id="imageContainer">
+        <a href="https://x.com/PNUTAIx" target="_blank">
+          <img id="image1" src="static/x64.png" alt="Image 1">
+        </a> 
+        <a href="https://t.me/PNUTAIx" target="_blank">
+            <img id="image2" src="static/telegram64.png" alt="Image 2">
+          </a>
+    </div>
+    
+
+        </div>
+            <div id="chatbar">
+                <input type="text" id="userinput" name="user_input" placeholder="Type here..." required style="border: 2px solid black;">
+            <button type="button" id="sendButton" onclick="handleSend()" style="border: 2px solid black;">Send</button>
+            
+            
+        
+    </div>
+    <script type="text/javascript">
+        // Test that script is running
+        console.log("Script loaded");
+        var disabled = false;
+
+        document.getElementById('userinput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') { // Check if the pressed key is Enter
+                handleSend(); // Call the function to send input
+                event.preventDefault(); // Prevent default form submission if inside a form
+            }
+        });
+
+
+       
+        // Make function explicitly global
+        var msgRef;
+        socket = new WebSocket('wss://onrender.pnutai.com/ws')
+        socket.onopen = function(event){
+            console.log('socket connected')
+
+           
+        }
+        window.handleSend = async function() {
+            if(disabled == false && document.getElementById('userinput').value != ''){
+                
+            disabled = true;
+            document.getElementById('userinput').placeholder = 'Wait for PNUT...'
+            console.log("handleSend executed");
+            let userInput = document.getElementById('userinput').value;
+            let submit = `${userInput}`
+
+            socket.send(submit)
+            console.log("socket emitted")
+            document.getElementById('userinput').value = ''
+            document.getElementById('userinput').disabled = true
+            document.getElementsByName('sendButton').disabled = true
+            
+            newMsgDiv = document.getElementById('bubble1')
+            newMsgDiv.style.visibility = 'visible';
+            newMsg = document.getElementById("speech")
+            newMsg.textContent = 'pnut is thinking...'
+            msgRef = newMsg
+
+            
+            window.handleChange = function(data){
+                console.log(data);
+                        msgRef.textContent = data
+                        document.getElementById('userinput').disabled = false
+                        document.getElementById('sendButton').disabled = false
+                        document.getElementById('userinput').placeholder = 'Type here...'
+                        disabled = false;
+    
+            }
+
+            
+            
+            
+        };
+
+        socket.binaryType = 'arraybuffer'
+
+        socket.onmessage = function(event){
+            if(typeof event.data == 'string'){
+                console.log('received data')
+                handleChange(event.data)
+            }
+
+            if(event.data instanceof ArrayBuffer){
+                const audioBlob = new Blob([event.data], { type: 'audio/mpeg' })
+                const audioUrl = URL.createObjectURL(audioBlob);
+                const audio = new Audio(audioUrl)
+                audio.play()
+            }
+            
+        }
+        window.longPoll = function() {
+            console.log("poll");
+            fetch('/long-poll')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    msgRef.style.whiteSpace = 'normal'
+                    msgRef.textContent = data
+                    responsiveVoice.speak(data, "US English Female")
+                    document.getElementById('userinput').disabled = false
+                    document.getElementById('sendButton').disabled = false
+                    document.getElementById('userinput').placeholder = 'Type here...'
+                    disabled = false;
+                    // Display the response from the server
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    // Retry long polling after an error
+                    setTimeout(longPoll, 2000);
+                });
+        };
+
+        // Wait for DOM to be ready
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("DOM loaded");
+            const button = document.getElementById('sendButton');
+            const input = document.getElementById('userinput');
+
+            if (button) {
+                button.onclick = window.handleSend;
+                console.log("Button handler attached");
+            }
+
+            if (input) {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        window.handleSend();
+                    }
+                });
+            }
+        });
+
+        // Initialize variables
+        var currMsg = '{{ text | safe | tojson }}';
+            }
+            
+    </script>
+
+</body>
+</html>
